@@ -43,7 +43,9 @@ itemsRouter.get('/', async (req, res, next) => {
 
 itemsRouter.get('/:id', async (req, res, next) => {
     try {
-        const item = await Item.findById(req.params.id);
+        const item = await Item.findById(req.params.id)
+            .populate('category', 'title')
+            .populate('seller', 'displayName phoneNumber');
 
         if (!item) {
             res.status(404).send({ error: 'Item not found!' });

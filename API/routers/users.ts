@@ -7,11 +7,18 @@ const usersRouter = express.Router();
 
 usersRouter.post('/register', async (req, res, next) => {
     try {
+        const { username, password, displayName, phoneNumber } = req.body;
+
+        const existingUser = await User.findOne({ phoneNumber });
+        if (existingUser) {
+            res.status(400).send({ message: 'Phone number already exists' });
+            return;
+        }
         const user = new User({
-            username: req.body.username,
-            password: req.body.password,
-            displayName: req.body.displayName,
-            phoneNumber: req.body.phoneNumber
+            username,
+            password,
+            displayName,
+            phoneNumber
         });
 
         user.generateToken();

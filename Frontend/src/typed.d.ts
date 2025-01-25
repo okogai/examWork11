@@ -54,15 +54,26 @@ export interface Item {
   seller: string;
 }
 
+export interface ItemById {
+  _id: string;
+  title: string;
+  description: string;
+  image: string;
+  price: number;
+  category: {
+    title: string;
+  };
+  seller: {
+    _id: string;
+    displayName: string;
+    phoneNumber: string;
+  };
+}
+
 export interface ItemMutation {
   title: string;
   description: string;
-  image: File | null
+  image: File | null;
   price: string;
   category: string;
 }
-
-export interface DeleteItemResponse {
-  message: string;
-}
-

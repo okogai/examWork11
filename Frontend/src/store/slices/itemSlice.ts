@@ -1,13 +1,20 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store.ts";
-import { GlobalError, Item } from '../../typed';
-import { createItem, deleteItem, fetchItemById, fetchItems, fetchItemsByCategory } from '../thunks/itemThunk.ts';
+import { GlobalError, Item, ItemById } from "../../typed";
+import {
+  createItem,
+  deleteItem,
+  fetchItemById,
+  fetchItems,
+  fetchItemsByCategory,
+} from "../thunks/itemThunk.ts";
 
 interface ItemsState {
-  currentItem: Item | null;
+  currentItem: ItemById | null;
   items: Item[];
   itemsLoading: boolean;
   createItemLoading: boolean;
+  deleteItemLoading: boolean;
   getItemError: GlobalError | null;
 }
 
@@ -16,24 +23,30 @@ const initialState: ItemsState = {
   items: [],
   itemsLoading: false,
   createItemLoading: false,
-  getItemError:  null,
+  deleteItemLoading: false,
+  getItemError: null,
 };
 
 export const selectCurrentItem = (state: RootState) => state.items.currentItem;
 export const selectItems = (state: RootState) => state.items.items;
-export const selectItemsLoading = (state: RootState) => state.items.itemsLoading;
-export const selectCreateItemLoading = (state: RootState) => state.items.createItemLoading;
+export const selectItemsLoading = (state: RootState) =>
+  state.items.itemsLoading;
+export const selectCreateItemLoading = (state: RootState) =>
+  state.items.createItemLoading;
+export const selectDeleteItemLoading = (state: RootState) =>
+  state.items.deleteItemLoading;
 
 export const itemsSlice = createSlice({
   name: "items",
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchItems.pending, (state) => {
       state.itemsLoading = true;
     });
-    builder.addCase(fetchItems.fulfilled, (state, action: PayloadAction<Item[]>) => {
+    builder.addCase(
+      fetchItems.fulfilled,
+      (state, action: PayloadAction<Item[]>) => {
         state.itemsLoading = false;
         state.items = action.payload;
       },
@@ -44,7 +57,9 @@ export const itemsSlice = createSlice({
     builder.addCase(fetchItemsByCategory.pending, (state) => {
       state.itemsLoading = true;
     });
-    builder.addCase(fetchItemsByCategory.fulfilled, (state, action: PayloadAction<Item[]>) => {
+    builder.addCase(
+      fetchItemsByCategory.fulfilled,
+      (state, action: PayloadAction<Item[]>) => {
         state.itemsLoading = false;
         state.items = action.payload;
       },
@@ -56,10 +71,12 @@ export const itemsSlice = createSlice({
       state.itemsLoading = true;
       state.getItemError = null;
     });
-    builder.addCase(fetchItemById.fulfilled, (state, action: PayloadAction<Item>) => {
+    builder.addCase(
+      fetchItemById.fulfilled,
+      (state, action: PayloadAction<ItemById>) => {
         state.itemsLoading = false;
         state.currentItem = action.payload;
-      state.getItemError = null;
+        state.getItemError = null;
       },
     );
     builder.addCase(fetchItemById.rejected, (state, { payload: error }) => {
@@ -67,26 +84,21 @@ export const itemsSlice = createSlice({
       state.getItemError = error || null;
     });
     builder.addCase(deleteItem.pending, (state) => {
-      state.itemsLoading = true;
-      state.getItemError = null;
+      state.deleteItemLoading = true;
     });
     builder.addCase(deleteItem.fulfilled, (state) => {
-        state.itemsLoading = false;
-        state.currentItem = null;
-        state.getItemError = null;
-      },
-    );
-    builder.addCase(deleteItem.rejected, (state, { payload: error }) => {
-      state.itemsLoading = false;
-      state.getItemError = error || null;
+      state.deleteItemLoading = false;
+      state.currentItem = null;
+    });
+    builder.addCase(deleteItem.rejected, (state) => {
+      state.deleteItemLoading = false;
     });
     builder.addCase(createItem.pending, (state) => {
       state.createItemLoading = true;
     });
     builder.addCase(createItem.fulfilled, (state) => {
-        state.createItemLoading = false;
-      },
-    );
+      state.createItemLoading = false;
+    });
     builder.addCase(createItem.rejected, (state) => {
       state.createItemLoading = false;
     });

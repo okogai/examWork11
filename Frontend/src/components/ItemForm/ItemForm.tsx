@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -9,23 +9,23 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  SelectChangeEvent
-} from '@mui/material';
+  SelectChangeEvent,
+} from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../app/hooks.ts";
 import { createItem } from "../../store/thunks/itemThunk.ts";
-import { NavLink, useNavigate } from 'react-router-dom';
-import { selectUser } from '../../store/slices/userSlice.ts';
-import FileInput from '../UI/FileInput/FileInput.tsx';
-import { fetchCategories } from '../../store/thunks/categoryThunk.ts';
-import { selectCategories } from '../../store/slices/categorySlice.ts';
-import { selectCreateItemLoading } from '../../store/slices/itemSlice.ts';
+import { NavLink, useNavigate } from "react-router-dom";
+import { selectUser } from "../../store/slices/userSlice.ts";
+import FileInput from "../UI/FileInput/FileInput.tsx";
+import { fetchCategories } from "../../store/thunks/categoryThunk.ts";
+import { selectCategories } from "../../store/slices/categorySlice.ts";
+import { selectCreateItemLoading } from "../../store/slices/itemSlice.ts";
 
 const initialState = {
   title: "",
   description: "",
   price: "",
   category: "",
-  image:  null,
+  image: null,
 };
 
 const ItemForm = () => {
@@ -39,7 +39,7 @@ const ItemForm = () => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
-  const [filename, setFilename] = useState('');
+  const [filename, setFilename] = useState("");
   const [form, setForm] = useState(initialState);
 
   const fileInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +53,8 @@ const ItemForm = () => {
     }
   };
 
-  const handleChange = (e: | SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  const handleChange = (
+    e: SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
@@ -150,7 +151,8 @@ const ItemForm = () => {
         type="submit"
         variant="contained"
         color="primary"
-        loading={loading}>
+        loading={loading}
+      >
         Add Item
       </Button>
     </Box>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { RegisterMutation } from "../../typed";
 import {
   Avatar,
@@ -19,12 +19,12 @@ import {
 } from "../../store/slices/userSlice.ts";
 import { register } from "../../store/thunks/userThunk.ts";
 
-const initialState ={
+const initialState = {
   username: "",
   password: "",
   displayName: "",
   phoneNumber: "",
-}
+};
 
 const RegisterPage = () => {
   const dispatch = useAppDispatch();
@@ -81,7 +81,6 @@ const RegisterPage = () => {
           <Grid container direction={"column"} size={12} spacing={2}>
             <Grid size={12}>
               <TextField
-                required
                 fullWidth
                 id="username"
                 label="Username"
@@ -94,7 +93,6 @@ const RegisterPage = () => {
             </Grid>
             <Grid size={12}>
               <TextField
-                required
                 fullWidth
                 name="password"
                 label="Password"
@@ -108,7 +106,6 @@ const RegisterPage = () => {
             </Grid>
             <Grid size={12}>
               <TextField
-                required
                 fullWidth
                 name="displayName"
                 label="Display name"
@@ -121,7 +118,6 @@ const RegisterPage = () => {
             </Grid>
             <Grid size={12}>
               <TextField
-                required
                 fullWidth
                 name="phoneNumber"
                 label="Phone number"
