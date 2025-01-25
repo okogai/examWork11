@@ -41,6 +41,21 @@ itemsRouter.get('/', async (req, res, next) => {
     }
 });
 
+itemsRouter.get('/:id', async (req, res, next) => {
+    try {
+        const item = await Item.findById(req.params.id);
+
+        if (!item) {
+            res.status(404).send({ error: 'Item not found!' });
+            return;
+        }
+
+        res.send(item);
+    } catch (e) {
+        next(e);
+    }
+});
+
 itemsRouter.delete('/:id', auth, async (req, res, next) => {
     const user = (req as RequestWithUser).user;
 

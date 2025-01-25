@@ -43,3 +43,25 @@ export interface Category {
   title: string;
   _id: string;
 }
+
+export interface Item {
+  title: string;
+  description: string;
+  image: File
+  price: number;
+  category: string;
+  seller: string;
+}
+
+export interface ItemMutation {
+  title: string;
+  description: string;
+  image: File
+  price: number;
+  category: string;
+}
+
+export interface DeleteItemResponse {
+  message: string;
+}
+
