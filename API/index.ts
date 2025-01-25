@@ -5,6 +5,8 @@ import mongoDb from "./mongoDb";
 import usersRouter from "./routers/users";
 import config from "./config";
 import path from "path";
+import categoriesRouter from "./routers/categories";
+import itemsRouter from "./routers/items";
 
 const app = express();
 const port = 8000;
@@ -13,6 +15,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/users', usersRouter);
+app.use('/categories', categoriesRouter);
+app.use('/items', itemsRouter);
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 

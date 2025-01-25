@@ -37,7 +37,9 @@ const UserSchema = new Schema<HydratedDocument<UserFields>, UserModel, UserMetho
         required: true },
     phoneNumber: {
         type: String,
-        required: true },
+        required: true,
+        unique: true
+    },
     token: {
         type: String,
         required: [true, 'Token is required'],
