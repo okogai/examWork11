@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { RegisterMutation } from "../../typed";
+import { LoginMutation } from '../../typed';
 import {
   Alert,
   Avatar,
@@ -30,7 +30,7 @@ const RegisterPage = () => {
   const navigate = useNavigate();
   const loginError = useAppSelector(selectLoginError);
   const loginLoading = useAppSelector(selectLoginLoading);
-  const [form, setForm] = useState<RegisterMutation>(initialState);
+  const [form, setForm] = useState<LoginMutation>(initialState);
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
