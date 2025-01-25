@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { RegisterMutation } from "../../typed";
 import {
   Avatar,
@@ -19,15 +19,19 @@ import {
 } from "../../store/slices/userSlice.ts";
 import { register } from "../../store/thunks/userThunk.ts";
 
+const initialState ={
+  username: "",
+  password: "",
+  displayName: "",
+  phoneNumber: "",
+}
+
 const RegisterPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const registerError = useAppSelector(selectRegisterError);
   const registerLoading = useAppSelector(selectRegisterLoading);
-  const [form, setForm] = useState<RegisterMutation>({
-    username: "",
-    password: "",
-  });
+  const [form, setForm] = useState<RegisterMutation>(initialState);
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -100,6 +104,32 @@ const RegisterPage = () => {
                 onChange={inputChangeHandler}
                 error={Boolean(getFieldError("password"))}
                 helperText={getFieldError("password")}
+              />
+            </Grid>
+            <Grid size={12}>
+              <TextField
+                required
+                fullWidth
+                name="displayName"
+                label="Display name"
+                id="displayName"
+                value={form.displayName}
+                onChange={inputChangeHandler}
+                error={Boolean(getFieldError("displayName"))}
+                helperText={getFieldError("displayName")}
+              />
+            </Grid>
+            <Grid size={12}>
+              <TextField
+                required
+                fullWidth
+                name="phoneNumber"
+                label="Phone number"
+                id="phoneNumber"
+                value={form.phoneNumber}
+                onChange={inputChangeHandler}
+                error={Boolean(getFieldError("phoneNumber"))}
+                helperText={getFieldError("phoneNumber")}
               />
             </Grid>
           </Grid>

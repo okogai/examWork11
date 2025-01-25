@@ -5,7 +5,7 @@ import {imagesUpload} from "../multer";
 
 const itemsRouter = express.Router();
 
-itemsRouter.post('/', auth, imagesUpload.single("images"), async (req, res, next) => {
+itemsRouter.post('/', auth, imagesUpload.single("image"), async (req, res, next) => {
     const user = (req as RequestWithUser).user;
     if (!user){
         res.status(401).send({error: 'Token not provided!'});
@@ -20,7 +20,7 @@ itemsRouter.post('/', auth, imagesUpload.single("images"), async (req, res, next
             price,
             category,
             seller: user._id,
-            image: req.file ? `images/${req.file.filename}` : null,
+            image: req.file ? `/public/images/${req.file.filename}` : null,
         });
         await item.save();
         res.status(201).send(item);

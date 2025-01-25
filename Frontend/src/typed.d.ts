@@ -1,12 +1,16 @@
 export interface User {
   username: string;
   _id: string;
+  displayName: string;
+  phoneNumber: string;
   token: string;
 }
 
 export interface RegisterMutation {
   username: string;
   password: string;
+  displayName: string;
+  phoneNumber: string;
 }
 
 export interface RegisterResponse {
@@ -33,4 +37,9 @@ export interface LoginMutation {
 
 export interface GlobalError {
   error: string;
+}
+
+export interface Category {
+  title: string;
+  _id: string;
 }
