@@ -3,6 +3,7 @@ import NavBar from "./components/UI/NavBar/NavBar.tsx";
 import RegisterPage from "./components/RegisterPage/RegisterPage.tsx";
 import LoginForm from "./components/LoginForm/LoginForm.tsx";
 import HomePage from './containers/HomePage/HomePage.tsx';
+import ItemForm from './components/ItemForm/ItemForm.tsx';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/category/:id" element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/add-item" element={<ItemForm />} />
       </Routes>
     </>
   );

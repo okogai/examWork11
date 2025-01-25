@@ -48,7 +48,7 @@ export interface Item {
   _id: string;
   title: string;
   description: string;
-  image: File
+  image: string;
   price: number;
   category: string;
   seller: string;
@@ -57,8 +57,8 @@ export interface Item {
 export interface ItemMutation {
   title: string;
   description: string;
-  image: File
-  price: number;
+  image: File | null
+  price: string;
   category: string;
 }
 

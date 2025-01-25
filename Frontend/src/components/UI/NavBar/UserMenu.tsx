@@ -29,8 +29,8 @@ const UserMenu: React.FC<Props> = ({ user }) => {
 
   return (
     <>
-      <Button color="inherit" component={NavLink} to="/">
-        Home
+      <Button color="inherit" component={NavLink} to="/add-item">
+        Add Item
       </Button>
       <Button onClick={handleClick} color="inherit">
         Hello, {user.displayName}

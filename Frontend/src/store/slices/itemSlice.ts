@@ -7,6 +7,7 @@ interface ItemsState {
   currentItem: Item | null;
   items: Item[];
   itemsLoading: boolean;
+  createItemLoading: boolean;
   getItemError: GlobalError | null;
 }
 
@@ -14,13 +15,14 @@ const initialState: ItemsState = {
   currentItem: null,
   items: [],
   itemsLoading: false,
+  createItemLoading: false,
   getItemError:  null,
-
 };
 
 export const selectCurrentItem = (state: RootState) => state.items.currentItem;
 export const selectItems = (state: RootState) => state.items.items;
 export const selectItemsLoading = (state: RootState) => state.items.itemsLoading;
+export const selectCreateItemLoading = (state: RootState) => state.items.createItemLoading;
 
 export const itemsSlice = createSlice({
   name: "items",
@@ -79,14 +81,14 @@ export const itemsSlice = createSlice({
       state.getItemError = error || null;
     });
     builder.addCase(createItem.pending, (state) => {
-      state.itemsLoading = true;
+      state.createItemLoading = true;
     });
     builder.addCase(createItem.fulfilled, (state) => {
-        state.itemsLoading = false;
+        state.createItemLoading = false;
       },
     );
     builder.addCase(createItem.rejected, (state) => {
-      state.itemsLoading = false;
+      state.createItemLoading = false;
     });
   },
 });
