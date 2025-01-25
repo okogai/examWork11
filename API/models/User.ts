@@ -1,12 +1,7 @@
 import mongoose, {HydratedDocument, Model} from 'mongoose';
 import bcrypt from 'bcrypt';
 import {randomUUID} from "node:crypto";
-
-interface UserFields {
-    username: string;
-    password: string;
-    token: string;
-}
+import {UserFields} from "../types";
 
 type UserModel = Model<UserFields, {}, UserMethods>;
 
@@ -37,6 +32,12 @@ const UserSchema = new Schema<HydratedDocument<UserFields>, UserModel, UserMetho
         type: String,
         required: [true, 'Password is required'],
     },
+    displayName: {
+        type: String,
+        required: true },
+    phoneNumber: {
+        type: String,
+        required: true },
     token: {
         type: String,
         required: [true, 'Token is required'],
