@@ -152,6 +152,7 @@ const ItemForm = () => {
         variant="contained"
         color="primary"
         loading={loading}
+        disabled={loading}
       >
         Add Item
       </Button>

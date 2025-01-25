@@ -5,7 +5,6 @@ import {
   Avatar,
   Box,
   Button,
-  CircularProgress,
   Container,
   TextField,
   Typography,
@@ -102,12 +101,9 @@ const RegisterPage = () => {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-          >
-            {loginLoading ? (
-              <CircularProgress size={24} color="inherit" />
-            ) : (
-              "Sign in"
-            )}
+            loading={loginLoading}
+            disabled={loginLoading}
+          >Sign in
           </Button>
         </Box>
       </Box>

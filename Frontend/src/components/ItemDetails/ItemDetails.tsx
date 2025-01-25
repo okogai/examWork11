@@ -98,6 +98,7 @@ const ItemDetails = () => {
             onClick={handleDelete}
             sx={{ margin: 2, alignSelf: "center" }}
             loading={deleteItemLoading}
+            disabled={deleteItemLoading}
           >
             delete
           </Button>
