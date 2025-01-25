@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from "../../app/store.ts";
 import { GlobalError, Item } from '../../typed';
-import { createItem, deleteItem, fetchItemById, fetchItems } from '../thunks/itemThunk.ts';
+import { createItem, deleteItem, fetchItemById, fetchItems, fetchItemsByCategory } from '../thunks/itemThunk.ts';
 
 interface ItemsState {
   currentItem: Item | null;
@@ -37,6 +37,17 @@ export const itemsSlice = createSlice({
       },
     );
     builder.addCase(fetchItems.rejected, (state) => {
+      state.itemsLoading = false;
+    });
+    builder.addCase(fetchItemsByCategory.pending, (state) => {
+      state.itemsLoading = true;
+    });
+    builder.addCase(fetchItemsByCategory.fulfilled, (state, action: PayloadAction<Item[]>) => {
+        state.itemsLoading = false;
+        state.items = action.payload;
+      },
+    );
+    builder.addCase(fetchItemsByCategory.rejected, (state) => {
       state.itemsLoading = false;
     });
     builder.addCase(fetchItemById.pending, (state) => {

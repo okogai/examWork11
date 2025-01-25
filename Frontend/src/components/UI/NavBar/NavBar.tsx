@@ -20,7 +20,7 @@ const NavBar = () => {
             to="/"
             sx={{ flexGrow: 1, textDecoration: "none" }}
           >
-            Home
+            Store
           </Typography>
           <Grid>{user ? <UserMenu user={user} /> : <AnonymousMenu />}</Grid>
         </Toolbar>

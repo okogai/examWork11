@@ -4,10 +4,18 @@ import { DeleteItemResponse, GlobalError, Item, ItemMutation } from '../../typed
 import { isAxiosError } from 'axios';
 import { RootState } from '../../app/store.ts';
 
-export const fetchItems = createAsyncThunk<Item[], { category?: string }>(
+export const fetchItems = createAsyncThunk<Item[], void>(
   "items/fetchItems",
-  async ({ category }) => {
-    const response = await axiosAPI.get('/items', { params: { category } });
+  async () => {
+    const response = await axiosAPI.get('/items');
+    return response.data || [];
+  }
+);
+
+export const fetchItemsByCategory = createAsyncThunk<Item[], string>(
+  "items/fetchItemsByCategory",
+  async (id: string) => {
+    const response = await axiosAPI.get(`/items?category=${id}`);
     return response.data || [];
   }
 );
